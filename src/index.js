@@ -13,10 +13,8 @@ const validate = (params) => {
     password,
     username
   } = params;
-  const mailValidator = new MailValidator(email);
-  const passwordValidator = new PasswordValidator(password);
-  const nameValidator = new NameValidator(name)
-  const usernameValidator = new UsernameValidator(username)
+  const [mailValidator, passwordValidator, nameValidator, usernameValidator] =
+  [new MailValidator(email), new PasswordValidator(password), new NameValidator(name), new UsernameValidator(username)]
   return Promise.all([
     nameValidator.validate(),
     usernameValidator.validate(),
@@ -78,6 +76,7 @@ const onSubmit = async () => {
     username: usernameVal,
     name: nameVal
   }
+  const { email, password, username, name } = params;
   const results = await validate(params);
   if (
     results[0].success && 
