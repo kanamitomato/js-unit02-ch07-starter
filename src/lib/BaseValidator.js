@@ -18,4 +18,15 @@ export default class {
       }
     });
   }
+  _errorResult(message) {
+    if (message) {
+      return Promise.resolve()
+    } else {
+      return Promise.reject({
+        success: false,
+        type,
+        message
+      })
+    }
+  }
 }
